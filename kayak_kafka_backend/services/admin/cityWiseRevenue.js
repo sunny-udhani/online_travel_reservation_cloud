@@ -3,6 +3,7 @@ let Hotel = require('../../Models/Hotel');
 let Car = require('../../Models/Car');
 let Flight = require('../../Models/Flight');
 let ObjectId = require('mongodb').ObjectID;
+var ObjectId_m = require('mongoose').Types.ObjectId;
 
 let jsonObj = [];
 
@@ -281,68 +282,72 @@ fetchCityByFlights  = ((jsonObj, callback)=>{
                 if(results.length>0){
                     let mysqlCount=0;
                     results.map((mysqlresult)=>{
-                        Flight.find({_id : ObjectId(mysqlresult.flightId)},{origin:1}, function (err, results1) {
-                            // console.log("results1");
-                            // console.log(results1);
-                            let cityExists = false;
-                            let jsoncount = 0;
-                            if(jsonObj.length>0){
-                                jsonObj.map((obj)=>{
-                                    // console.log(obj);
-                                    if(obj.city===results1[0].origin){
-                                        console.log(typeof (obj.totalRevenue.flight));
-                                        obj.totalRevenue.flight = obj.totalRevenue.flight + mysqlresult.totalRevenue;
-                                        console.log(obj);
-                                        cityExists = true;
-                                    }
-                                    jsoncount ++;
-                                    if(jsoncount===jsonObj.length){
-                                        // console.log("JSON COunt : " + jsoncount);
-                                        mysqlCount++;
-                                        if(!cityExists){
-                                            console.log("City does not exist" + cityExists);
-                                            jsonObj.push(
-                                                {
-                                                    city:results1[0].origin,
-                                                    totalRevenue:{
-                                                        hotel : 0,
-                                                        car : 0,
-                                                        flight : mysqlresult.totalRevenue
-                                                    }
-                                                })
+                        if(ObjectId_m.isValid(mysqlresult)) {
+                            Flight.find({_id: ObjectId(mysqlresult.flightId)}, {origin: 1}, function (err, results1) {
+                                // console.log("results1");
+                                // console.log(results1);
+                                let cityExists = false;
+                                let jsoncount = 0;
+                                if (jsonObj.length > 0) {
+                                    jsonObj.map((obj) => {
+                                        // console.log(obj);
+                                        if (obj.city === results1[0].origin) {
+                                            console.log(typeof (obj.totalRevenue.flight));
+                                            obj.totalRevenue.flight = obj.totalRevenue.flight + mysqlresult.totalRevenue;
+                                            console.log(obj);
+                                            cityExists = true;
                                         }
-                                    }
-                                    // console.log("JSON Count : " + jsoncount);
-                                    // console.log(jsonObj);
-                                    if(mysqlCount===results.length){
-                                        console.log("Before CB in Flight");
-                                        console.log(jsonObj);
-                                        response.status=200;
-                                        callback(null, response);
-                                    }
-                                });
-                            }
-                            else {
-                                jsonObj.push(
-                                    {
-                                        city:results1[0].origin,
-                                        totalRevenue:{
-                                            hotel : 0,
-                                            car : 0,
-                                            flight : mysqlresult.totalRevenue
+                                        jsoncount++;
+                                        if (jsoncount === jsonObj.length) {
+                                            // console.log("JSON COunt : " + jsoncount);
+                                            mysqlCount++;
+                                            if (!cityExists) {
+                                                console.log("City does not exist" + cityExists);
+                                                jsonObj.push(
+                                                    {
+                                                        city: results1[0].origin,
+                                                        totalRevenue: {
+                                                            hotel: 0,
+                                                            car: 0,
+                                                            flight: mysqlresult.totalRevenue
+                                                        }
+                                                    })
+                                            }
+                                        }
+                                        // console.log("JSON Count : " + jsoncount);
+                                        // console.log(jsonObj);
+                                        if (mysqlCount === results.length) {
+                                            console.log("Before CB in Flight");
+                                            console.log(jsonObj);
+                                            response.status = 200;
+                                            callback(null, response);
                                         }
                                     });
-                                mysqlCount++;
-                                // console.log(jsonObj);
-                                if(mysqlCount===results.length){
-                                    console.log("Before CB in Flight");
-                                    console.log(jsonObj);
-                                    response.status=200;
-                                    callback(null, response);
                                 }
-                            }
-                            // console.log("mysqlCount : "+mysqlCount);
-                        });
+                                else {
+                                    jsonObj.push(
+                                        {
+                                            city: results1[0].origin,
+                                            totalRevenue: {
+                                                hotel: 0,
+                                                car: 0,
+                                                flight: mysqlresult.totalRevenue
+                                            }
+                                        });
+                                    mysqlCount++;
+                                    // console.log(jsonObj);
+                                    if (mysqlCount === results.length) {
+                                        console.log("Before CB in Flight");
+                                        console.log(jsonObj);
+                                        response.status = 200;
+                                        callback(null, response);
+                                    }
+                                }
+                                // console.log("mysqlCount : "+mysqlCount);
+                            });
+                        }else{
+                            callback("aaj", null);
+                        }
                     });
                 }
             }
