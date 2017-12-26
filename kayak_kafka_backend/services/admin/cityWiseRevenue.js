@@ -346,7 +346,8 @@ fetchCityByFlights  = ((jsonObj, callback)=>{
                                 // console.log("mysqlCount : "+mysqlCount);
                             });
                         }else{
-                            callback("aaj", null);
+                            response.status = 400;
+                            callback(null, response);
                         }
                     });
                 }
