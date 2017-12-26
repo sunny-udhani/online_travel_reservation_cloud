@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "admintest": "mocha",
-    "start": "node ./bin/www & cd client & npm install --only=dev & npm install & npm run build"
+    "start": "cd client && npm install && npm run build && cd .. && node ./bin/www"
   },
   "dependencies": {
     "assert": "^1.4.1",
