@@ -12,9 +12,9 @@ function getConnection() {
         port: 3306,
         debug: false,
         ssl: {
-            ca   : fs.readFileSync('C:\\Users\\admin\\Desktop\\kayak-1\\server-ca.pem'), // should be enough for AWS
-            key  : fs.readFileSync('C:\\Users\\admin\\Desktop\\kayak-1\\client-key.pem'), // required for google mysql cloud db
-            cert : fs.readFileSync('C:\\Users\\admin\\Desktop\\kayak-1\\client-cert.pem'), // required for google mysql cloud db
+            ca   : fs.readFileSync('/home/Sunny/273team18/ca/server-ca.pem'), // should be enough for AWS
+            key  : fs.readFileSync('/home/Sunny/273team18/ca/client-key.pem'), // required for google mysql cloud db
+            cert : fs.readFileSync('/home/Sunny/273team18/ca/client-cert.pem'), // required for google mysql cloud db
         }
     });
     return connection;
