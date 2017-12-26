@@ -27,13 +27,13 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-
-let corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true,
-};
-
-app.use(cors(corsOptions));
+//
+// let corsOptions = {
+//     origin: 'http://localhost:3000',
+//     credentials: true,
+// };
+//
+// app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
