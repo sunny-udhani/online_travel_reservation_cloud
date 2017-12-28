@@ -32,7 +32,7 @@ import {Route, withRouter} from 'react-router-dom';
 
         return(
             <div className="profile-icon-editor" style={style}>
-                <img src={"http://35.185.121.58:3001/images/"+this.props.username+".jpg?_=" + Date.now()} alt={this.props.alt || "No profile picture "} />
+                <img src={"http://35.185.121.58/images/"+this.props.username+".jpg?_=" + Date.now()} alt={this.props.alt || "No profile picture "} />
                 <form>
                     <input className="hidden" type="file" id="profile-icon-editor-input" onChange={this.changeProfilePicture.bind(this)}/>
                     <label htmlFor="profile-icon-editor-input" style={stylecolor}className="glyphicon glyphicon-pencil"></label>
