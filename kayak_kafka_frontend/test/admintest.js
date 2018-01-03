@@ -3,13 +3,13 @@ let request = require('request');
 let http = require("http");
 
 let headers = {
-    Cookie: "Webstorm-aeae2011=0b326edc-fe15-4ef3-9d79-c992d67934a5; _gu=c356e94f-8745-4be0-8189-268517b6d4a2; _gs=2.s(src=http://35.185.121.58/); _gw=2.u[~0,~0,~0,~0,~0]v[~eznzi,~7,~0]a(); Idea-75f91138=154bfc31-7c80-4b7b-8719-062f374b61c4; JSESSIONID=C7F22674A14383C831C6EEE4C05890E2; connect.sid=s%3AL3lBgm0O6WtJCCXqA4vTBrCd7vbnR6u2.ksAOM2vuJh9Hha9bZsBVonx3Do7QXxaMAb7WO7hONtk"
+    Cookie: "Webstorm-aeae2011=0b326edc-fe15-4ef3-9d79-c992d67934a5; _gu=c356e94f-8745-4be0-8189-268517b6d4a2; _gs=2.s(src=http://35.196.249.89/); _gw=2.u[~0,~0,~0,~0,~0]v[~eznzi,~7,~0]a(); Idea-75f91138=154bfc31-7c80-4b7b-8719-062f374b61c4; JSESSIONID=C7F22674A14383C831C6EEE4C05890E2; connect.sid=s%3AL3lBgm0O6WtJCCXqA4vTBrCd7vbnR6u2.ksAOM2vuJh9Hha9bZsBVonx3Do7QXxaMAb7WO7hONtk"
 };
 
 describe('Testing URL and Login for Kayak', function() {
 
     it('should return the login if the url is correct', function(done) {
-        http.get('http://35.185.121.58/', function(res) {
+        http.get('http://35.196.249.89/', function(res) {
             console.log(res.statusCode);
             assert.equal(200, res.statusCode);
             done();
@@ -17,7 +17,7 @@ describe('Testing URL and Login for Kayak', function() {
     });
 
     it('should return error if the url is incorrect', function(done) {
-        http.get('http://35.185.121.58/abc', function(res) {
+        http.get('http://35.196.249.89/abc', function(res) {
             console.log(res.statusCode);
             assert.equal(404, res.statusCode);
             done();
@@ -25,7 +25,7 @@ describe('Testing URL and Login for Kayak', function() {
     });
 
     it('should login as for given username and password sent', function(done) {
-        request.post('http://35.185.121.58/users/login', {
+        request.post('http://35.196.249.89/users/login', {
             form : {
                 username : 'admin',
                 password : 'admin',
@@ -40,7 +40,7 @@ describe('Testing URL and Login for Kayak', function() {
     });
 
     it('should not login as invalid username and password sent', function(done) {
-        request.post('http://35.185.121.58/users/login', {
+        request.post('http://35.196.249.89/users/login', {
             form : {
                 username : 'addscdsmin',
                 password : 'sdcds',
@@ -57,7 +57,7 @@ describe('Testing URL and Login for Kayak', function() {
 
 describe('fetch Hotels', function () {
     it('should fetch hotels', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotels', {
+        request.post('http://35.196.249.89/admin/fetchHotels', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -69,7 +69,7 @@ describe('fetch Hotels', function () {
     });
 
     it('should fetch hotels filtering by hotelName', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotels', {
+        request.post('http://35.196.249.89/admin/fetchHotels', {
             form : {
                 hotelName : 'oberoi',
             },
@@ -84,7 +84,7 @@ describe('fetch Hotels', function () {
     });
 
     it('should fetch hotels filtering by city', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotels', {
+        request.post('http://35.196.249.89/admin/fetchHotels', {
             form : {
                 city : 'san jose',
             },
@@ -99,7 +99,7 @@ describe('fetch Hotels', function () {
     });
 
     it('should not fetch any hotels filtering by incorrect value of city', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotels', {
+        request.post('http://35.196.249.89/admin/fetchHotels', {
             form : {
                 city : 'vnerinvciern243',
             },
@@ -116,7 +116,7 @@ describe('fetch Hotels', function () {
 
 describe('fetch Flights', function () {
     it('should fetch hotels', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlights', {
+        request.post('http://35.196.249.89/admin/fetchFlights', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -128,7 +128,7 @@ describe('fetch Flights', function () {
     });
 
     it('should fetch Flights filtering by Fligth No', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlights', {
+        request.post('http://35.196.249.89/admin/fetchFlights', {
             form : {
                 flightNo : '123'
             },
@@ -143,7 +143,7 @@ describe('fetch Flights', function () {
     });
 
     it('should fetch Flights filtering by Flight Operator', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlights', {
+        request.post('http://35.196.249.89/admin/fetchFlights', {
             form : {
                 flightOperator : 'southwest'
             },
@@ -158,7 +158,7 @@ describe('fetch Flights', function () {
     });
 
     it('should fetch Flights filtering by origin City', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlights', {
+        request.post('http://35.196.249.89/admin/fetchFlights', {
             form : {
                 origin : 'sjc'
             },
@@ -173,7 +173,7 @@ describe('fetch Flights', function () {
     });
 
     it('should not fetch Flights for incorrect value', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlights', {
+        request.post('http://35.196.249.89/admin/fetchFlights', {
             form : {
                 origin : 'scwew234'
             },
@@ -190,7 +190,7 @@ describe('fetch Flights', function () {
 
 describe('fetch Cars', function () {
     it('should fetch Cars', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCars', {
+        request.post('http://35.196.249.89/admin/fetchCars', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -203,7 +203,7 @@ describe('fetch Cars', function () {
 
 
     it('should fetch Cars filtering by hotelName', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCars', {
+        request.post('http://35.196.249.89/admin/fetchCars', {
             form : {
                 carType : 'sedan'
             },
@@ -218,7 +218,7 @@ describe('fetch Cars', function () {
     });
 
     it('should fetch Cars filtering by city', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCars', {
+        request.post('http://35.196.249.89/admin/fetchCars', {
             form : {
                 carMake : 'honda'
             },
@@ -233,7 +233,7 @@ describe('fetch Cars', function () {
     });
 
     it('should fetch Cars filtering by city', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCars', {
+        request.post('http://35.196.249.89/admin/fetchCars', {
             form : {
                 city : 'san jose'
             },
@@ -248,7 +248,7 @@ describe('fetch Cars', function () {
     });
 
     it('should not fetch Cars details for incorrect value', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCars', {
+        request.post('http://35.196.249.89/admin/fetchCars', {
             form : {
                 carMake : 'sdcdscdscds'
             },
@@ -265,7 +265,7 @@ describe('fetch Cars', function () {
 
 describe('fetch Hotel Bookings', function () {
     it('should fetch Hotel Bookings', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotelBookings', {
+        request.post('http://35.196.249.89/admin/fetchHotelBookings', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -277,7 +277,7 @@ describe('fetch Hotel Bookings', function () {
     });
 
     it('should fetch Hotel  Bookings by booking Id', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotelBookings', {
+        request.post('http://35.196.249.89/admin/fetchHotelBookings', {
             form : {
                 bookingId : '10'
             },
@@ -292,7 +292,7 @@ describe('fetch Hotel Bookings', function () {
     });
 
     it('should fetch Hotel  Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotelBookings', {
+        request.post('http://35.196.249.89/admin/fetchHotelBookings', {
             form : {
                 searchbyusername : 'sjsu@sjsu.com'
             },
@@ -309,7 +309,7 @@ describe('fetch Hotel Bookings', function () {
 
 
     it('Negative Testing. : should not fetch Hotel  Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchHotelBookings', {
+        request.post('http://35.196.249.89/admin/fetchHotelBookings', {
             form : {
                 searchbyusername : 'sidcnisdnciudsciuds'
             },
@@ -326,7 +326,7 @@ describe('fetch Hotel Bookings', function () {
 
 describe('fetch Flight Bookings', function () {
     it('should fetch Flight Bookings', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlightBookings', {
+        request.post('http://35.196.249.89/admin/fetchFlightBookings', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -338,7 +338,7 @@ describe('fetch Flight Bookings', function () {
     });
 
     it('should fetch Flight  Bookings by booking Id', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlightBookings', {
+        request.post('http://35.196.249.89/admin/fetchFlightBookings', {
             form : {
                 bookingId : '34'
             },
@@ -353,7 +353,7 @@ describe('fetch Flight Bookings', function () {
     });
 
     it('should fetch Flight  Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlightBookings', {
+        request.post('http://35.196.249.89/admin/fetchFlightBookings', {
             form : {
                 searchbyusername : 'sjsu@sjsu.com'
             },
@@ -370,7 +370,7 @@ describe('fetch Flight Bookings', function () {
 
 
     it('Negative Testing. : should not fetch Flight  Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchFlightBookings', {
+        request.post('http://35.196.249.89/admin/fetchFlightBookings', {
             form : {
                 searchbyusername : 'sidcnisdnciudsciuds'
             },
@@ -387,7 +387,7 @@ describe('fetch Flight Bookings', function () {
 
 describe('fetch Car Bookings', function () {
     it('should fetch Car Bookings', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCarBookings', {
+        request.post('http://35.196.249.89/admin/fetchCarBookings', {
             headers
         }, function(error, response, body) {
             // console.log(response.session.username);
@@ -399,7 +399,7 @@ describe('fetch Car Bookings', function () {
     });
 
     it('should fetch Car Bookings by booking Id', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCarBookings', {
+        request.post('http://35.196.249.89/admin/fetchCarBookings', {
             form : {
                 bookingId : '10'
             },
@@ -414,7 +414,7 @@ describe('fetch Car Bookings', function () {
     });
 
     it('should fetch Car Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCarBookings', {
+        request.post('http://35.196.249.89/admin/fetchCarBookings', {
             form : {
                 searchbyusername : 'harry@sjsu.edu'
             },
@@ -431,7 +431,7 @@ describe('fetch Car Bookings', function () {
 
 
     it('Negative Testing. : should not fetch Car Bookings by username', function(done) {
-        request.post('http://35.185.121.58/admin/fetchCarBookings', {
+        request.post('http://35.196.249.89/admin/fetchCarBookings', {
             form : {
                 searchbyusername : 'sidcnisdnciudsciuds'
             },
@@ -448,7 +448,7 @@ describe('fetch Car Bookings', function () {
 
 describe('Add Hotel', function () {
     it('should add hotel', function(done) {
-        request.post('http://35.185.121.58/admin/addHotel', {
+        request.post('http://35.196.249.89/admin/addHotel', {
             form : {
                 hostId : '1',
                 hotelName: 'sheraton grand',
@@ -470,7 +470,7 @@ describe('Add Hotel', function () {
 
 describe('Add Car', function () {
     it('should add hotel', function(done) {
-        request.post('http://35.185.121.58/admin/addCar', {
+        request.post('http://35.196.249.89/admin/addCar', {
             form : {
                 hostId: '3',
                 carName: 'endevour',
@@ -495,7 +495,7 @@ describe('Add Car', function () {
 
 describe('Add Flight', function () {
     it('should add Flight', function(done) {
-        request.post('http://35.185.121.58/admin/addFlightData', {
+        request.post('http://35.196.249.89/admin/addFlightData', {
             form : {
                 flightNo : 'AA223',
                 hostId : '4',
