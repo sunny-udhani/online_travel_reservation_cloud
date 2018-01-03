@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "admintest": "mocha",
     "start": "cd client && npm install && npm run build && cd .. && node ./bin/www"
+=======
+    "test" : "mocha",
+    "start": "nodemon ./bin/www"
+>>>>>>> b0e9572e788385b101e69a4dab1689f0e4d0c013
   },
   "dependencies": {
     "assert": "^1.4.1",
