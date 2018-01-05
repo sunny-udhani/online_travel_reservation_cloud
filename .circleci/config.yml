@@ -14,7 +14,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/online_travel_reservation_cloud
+    working_directory: ~/online_travel_reservation_cloud/kayak_kafka_frontend
 
     steps:
       - checkout
